@@ -180,11 +180,12 @@ const useListController = <RecordType = Record>(
         get(state.admin.resources, [resource, 'list', 'total'], 0)
     );
 
+    const finalTotal = total || defaultTotal;
     const finalIds = typeof total === 'undefined' ? defaultIds : ids;
 
     const totalPages = useMemo(() => {
-        return Math.ceil(total / query.perPage) || 1;
-    }, [query.perPage, total]);
+        return Math.ceil(finalTotal / query.perPage) || 1;
+    }, [query.perPage, finalTotal]);
 
     useEffect(() => {
         if (
